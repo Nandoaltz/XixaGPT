@@ -1,0 +1,42 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: pull-na-maquina
+        uses: actions/checkout@v4
+
+      - name: Compilar o codigo
+        shell: powershell
+        run: |
+          .\mvnw clean package -DskipTests
+
+      - name: Criar artefato para execução
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-project
+          path: target/*.jar
+    
+  run:
+    needs: build
+    runs-on: self-hosted
+    steps:
+
+      - name: Baixar Artefato
+        uses: actions/download-artifact@v4
+        with:
+          name: app-project
+          path: app
+
+      - name: run project
+        shell: powershell
+        run: |
+          cd app
+          java -jar .\ChatBot-0.0.1-SNAPSHOT.jar --server.address=0.0.0.0 --server.port=8000
