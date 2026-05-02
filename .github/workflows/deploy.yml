@@ -38,15 +38,7 @@ jobs:
       - name: run project
         shell: powershell
         run: |
-          Write-Host "Diretório atual: $(Get-Location)"
-          Write-Host "Arquivos:"
-          Get-ChildItem -Recurse
           Start-Process -FilePath "java" `
+          cd .\_work\XixaGPT\XixaGPT\
           -ArgumentList "-jar", "app\ChatBot-0.0.1-SNAPSHOT.jar", "--server.address=0.0.0.0", "--server.port=8000" `
-          -NoNewWindow `
-          -RedirectStandardOutput "app\log.txt" `
-          -RedirectStandardError "app\error.txt"
-          
-          Start-Sleep -Seconds 5
-          Get-Content app\log.txt -ErrorAction SilentlyContinue
-          Get-Content app\error.txt -ErrorAction SilentlyContinue
+          -NoNewWindow
