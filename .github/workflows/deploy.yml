@@ -39,6 +39,6 @@ jobs:
         shell: powershell
         run: |
           Start-Process -FilePath "java" `
-          cd .\_work\XixaGPT\XixaGPT\
+          cd .\_work\XixaGPT\XixaGPT
           -ArgumentList "-jar", "app\ChatBot-0.0.1-SNAPSHOT.jar", "--server.address=0.0.0.0", "--server.port=8000" `
           -NoNewWindow
