@@ -13,7 +13,7 @@ public class ChatConfig {
     OllamaChatModel ollamaChatModel(){
         return OllamaChatModel.builder()
                 .baseUrl("http://host.docker.internal:11434/")
-                .modelName("qwen3.5:397b-cloud")
+                .modelName("gemma4:31b-cloud")
                 .build();
     }
 
