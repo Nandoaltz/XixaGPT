@@ -23,7 +23,9 @@ jobs:
         run: docker stop chatbot 2>$null; docker rm checkout 2>$null; echo "deu certo"
 
       - name: Build da imagem docker
+        shell: powershell
         run: docker build -t chatbot .
 
       - name: rodar container
+        shell: powershell
         run: docker run -d --name chatbot -p 8000:8000 chatbot
