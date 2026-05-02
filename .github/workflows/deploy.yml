@@ -18,25 +18,12 @@ jobs:
         run: |
           .\mvnw clean package -DskipTests
 
-      - name: Criar artefato para execução
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-project
-          path: target/*.jar
-    
-  run:
-    needs: build
-    runs-on: self-hosted
-    steps:
-
-      - name: Baixar Artefato
-        uses: actions/download-artifact@v4
-        with:
-          name: app-project
-          path: app
-
-      - name: run project
+      - name: parar container antigo
         shell: powershell
-        run: |
-          Start-Process -FilePath "java" -ArgumentList "-jar", "C:\actions-runner\_work\XixaGPT\XixaGPT\app\ChatBot-0.0.1-SNAPSHOT.jar", "--server.address=0.0.0.0", "--server.port=8000" -WindowStyle Hidden
-          Write-Host "Aplicação iniciada!"
+        run: docker stop chatbot 2>$null docker rm checkout 2>$null; echo "deu certo"
+
+      - name: Build da imagem docker
+        run: docker build -t chatbot .
+
+      - name: rodar container
+        run: docker run -d --name chatbot -p 8000:8000 chatbot
