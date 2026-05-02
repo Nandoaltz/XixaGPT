@@ -12,7 +12,7 @@ public class ChatConfig {
     @Bean
     OllamaChatModel ollamaChatModel(){
         return OllamaChatModel.builder()
-                .baseUrl("http://localhost:11434/")
+                .baseUrl("http://host.docker.internal:11434/")
                 .modelName("qwen3.5:397b-cloud")
                 .build();
     }
