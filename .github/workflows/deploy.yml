@@ -38,4 +38,8 @@ jobs:
       - name: run project
         shell: powershell
         run: |
-          java -jar C:\actions-runner\_work\XixaGPT\XixaGPT\app\ChatBot-0.0.1-SNAPSHOT.jar --server-address=0.0.0.0 --server.port=8000
+          $processo = Start-Process -FilePath "java" `
+          -ArgumentList "-jar", "C:\actions-runner\_work\XixaGPT\XixaGPT\app\ChatBot-0.0.1-SNAPSHOT.jar", "--server.address=0.0.0.0", "--server.port=8000" `
+          -PassThru `
+          -WindowStyle Hidden
+          Write-Host "Aplicação iniciada com PID: $($processo.Id)"
