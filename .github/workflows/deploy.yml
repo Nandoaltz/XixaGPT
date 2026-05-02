@@ -38,5 +38,4 @@ jobs:
       - name: run project
         shell: powershell
         run: |
-          $jar = Get-ChildItem -Path "app" -Filter "*.jar" | Select-Object -First 1
-          Start-Process -FilePath "java" -ArgumentList @("-jar", $jar.FullName, "--server.address=0.0.0.0", "--server.port=8000") -NoNewWindow -PassThru
+          java -jar C:\actions-runner\_work\XixaGPT\XixaGPT\app\ChatBot-0.0.1-SNAPSHOT.jar --server-address=0.0.0.0 --server.port=8000
